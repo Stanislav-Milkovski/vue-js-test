@@ -3,8 +3,8 @@
     <BreweryListFilter @selectFilter="getFilter"/>
 
     <section class="breweries">
-      <div class="brewery-item" :key="brewery.id" v-for="brewery in breweries">
-        <BreweryListItem v-if="brewery.brewery_type == filter || filter == 'all'" :breweryInfo="brewery" :filter="filter"/>
+      <div v-show="brewery.brewery_type == filter || filter == 'all'" class="brewery-item" :key="brewery.id" v-for="brewery in breweries">
+        <BreweryListItem  :breweryInfo="brewery" :filter="filter"/>
       </div>
     </section>
   </div>

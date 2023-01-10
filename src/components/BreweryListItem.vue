@@ -12,7 +12,7 @@
       <p>Street: {{ breweryInfo.street }}</p>
     </main>
     <footer>
-      <button @click.stop="infoActive = !infoActive">
+      <button @click.prevent ="toggleInfo">
         <span>
           Show Info
         </span>
@@ -28,6 +28,11 @@ export default {
   data() {
     return {
       infoActive: false
+    }
+  },
+  methods: {
+    toggleInfo() {
+      this.infoActive = !this.infoActive
     }
   },
 };
