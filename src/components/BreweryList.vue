@@ -1,19 +1,48 @@
 <template>
   <div>
-    <!-- BreweryListFilter -->
+    <BreweryListFilter @selectFilter="getFilter"/>
 
     <section class="breweries">
-      <div class="brewery-item">
-        <!-- BreweryListItem -->
+      <div class="brewery-item" :key="brewery.id" v-for="brewery in breweries">
+        <BreweryListItem v-if="brewery.brewery_type == filter || filter == 'all'" :breweryInfo="brewery" :filter="filter"/>
       </div>
     </section>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import BreweryListItem from './BreweryListItem.vue';
+import BreweryListFilter from './BreweryListFilter.vue';
 
 export default {
- 
+  name: 'BreweryList',
+  components: {
+    BreweryListItem,
+    BreweryListFilter
+  },
+  data() {
+    return {
+      breweries: [],
+      filter: 'all'
+    }
+  },
+  methods: {
+    async getBreweries() {
+      await axios.get('https://api.openbrewerydb.org/breweries')
+      .then((response) => {
+      this.breweries = response.data
+      console.log(this.breweries)
+      })
+      .catch((err) => console.log(err));
+    },
+    getFilter(filter) {
+      this.filter = filter
+    }
+  },
+  mounted() {
+    this.getBreweries()
+  },
 };
 </script>
 

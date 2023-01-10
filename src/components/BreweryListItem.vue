@@ -1,15 +1,17 @@
 <template>
-  <a class="card">
+  <a class="card" :href="breweryInfo. website_url">
     <h1></h1>
-    <p>Type: </p>
-    <main>
-      <p>Country: </p>
-      <p>City: </p>
-      <p>State: </p>
-      <p>Street: </p>
+    <p>Type: {{ breweryInfo.brewery_type }}</p>
+    <main v-show="infoActive">
+      <p>Name: {{ breweryInfo.name }}</p>
+      <p>Phone: {{ breweryInfo.phone }}</p>
+      <p>Country: {{ breweryInfo.country }}</p>
+      <p>City: {{ breweryInfo.city }}</p>
+      <p>State: {{ breweryInfo.state }}</p>
+      <p>Street: {{ breweryInfo.street }}</p>
     </main>
     <footer>
-      <button>
+      <button @click.stop="infoActive = !infoActive">
         <span>
           Show Info
         </span>
@@ -20,10 +22,20 @@
 
 <script>
 export default {
+  name: 'BreweryListItem',
+  props: ['breweryInfo','filter'],
+  data() {
+    return {
+      infoActive: false
+    }
+  },
 };
 </script>
 
 <style scoped>
+main {
+  display: hidden;
+}
 .card {
   border: 1px solid #f0f0f0;
   border-radius: 6px;

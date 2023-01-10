@@ -1,6 +1,8 @@
 <template>
   <section class="filter">
-    
+    <select name="" id="" @change="selectedFilter">
+      <option :value="filterItem" :key="filterItem" v-for="filterItem in breweryTypes" >{{ filterItem }}</option>
+    </select>
   </section>
 </template>
 
@@ -8,8 +10,14 @@
 export default {
   data() {
     return {
-      breweryTypes: ['', 'micro', 'contract', 'brewpub', 'regional'],
+      breweryTypes: ['all', 'micro', 'contract', 'brewpub', 'regional'],
+      chosenFilter: 'all'
     };
+  },
+  methods: {
+    selectedFilter($event) {
+    this.$emit('selectFilter', $event.target.value)
+    }
   },
 }
 </script>
@@ -19,5 +27,10 @@ select {
   padding: 12px;
   font-size: 1rem;
   margin-bottom: 24px;
+}
+.filter {
+  display: flex;
+  justify-content: space-around;
+
 }
 </style>
