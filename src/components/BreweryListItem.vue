@@ -1,8 +1,9 @@
 <template>
-  <a class="card" :href="breweryInfo. website_url">
+  <a class="card" :href="breweryInfo.website_url">
     <h1></h1>
     <p>Type: {{ breweryInfo.brewery_type }}</p>
-    <main v-show="infoActive">
+    <main :class="{ hidden: !infoActive }">
+      
       <p>Name: {{ breweryInfo.name }}</p>
       <p>Phone: {{ breweryInfo.phone }}</p>
       <p>Country: {{ breweryInfo.country }}</p>
@@ -33,8 +34,8 @@ export default {
 </script>
 
 <style scoped>
-main {
-  display: hidden;
+.hidden {
+  display: none;
 }
 .card {
   border: 1px solid #f0f0f0;
